@@ -16,6 +16,7 @@ export enum screenEnum {
   XXL = 1600,
 }
 
+// 屏幕标准尺寸 => 屏幕标准宽度
 const screenMap = new Map<sizeEnum, number>();
 
 screenMap.set(sizeEnum.XS, screenEnum.XS);

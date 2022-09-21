@@ -18,12 +18,15 @@
     inheritAttrs: false,
     props,
     setup(props, { slots }) {
+      // 判断移动端
       const isMobile = ref(false);
+      //
       const isSetState = ref(false);
 
       const appStore = useAppStore();
 
       // Monitor screen breakpoint information changes
+      // 监听屏幕变化，同步更新信息
       createBreakpointListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.LG);
         if (lgWidth) {
@@ -35,10 +38,12 @@
       const { prefixCls } = toRefs(props);
 
       // Inject variables into the global
+      // 注入
       createAppProviderContext({ prefixCls, isMobile });
 
       /**
        * Used to maintain the state before the window changes
+       * 窗口变化之前保存状态
        */
       function handleRestoreState() {
         if (unref(isMobile)) {
