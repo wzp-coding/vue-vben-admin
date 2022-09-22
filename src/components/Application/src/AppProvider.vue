@@ -9,6 +9,7 @@
   const props = {
     /**
      * class style prefix
+     * 类名前缀
      */
     prefixCls: { type: String, default: prefixCls },
   };
@@ -20,7 +21,7 @@
     setup(props, { slots }) {
       // 判断移动端
       const isMobile = ref(false);
-      //
+      // 标志是否设置过state
       const isSetState = ref(false);
 
       const appStore = useAppStore();
@@ -30,7 +31,8 @@
       createBreakpointListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.LG);
         if (lgWidth) {
-          isMobile.value = width.value - 1 < lgWidth;
+          // 窗口宽度小于992则视为移动端
+          isMobile.value = width.value - 1 < lgWidth; 
         }
         handleRestoreState();
       });
@@ -38,7 +40,7 @@
       const { prefixCls } = toRefs(props);
 
       // Inject variables into the global
-      // 注入
+      // 将prefixCls, isMobile通过provide注入到每个组件中
       createAppProviderContext({ prefixCls, isMobile });
 
       /**
@@ -48,6 +50,7 @@
       function handleRestoreState() {
         if (unref(isMobile)) {
           if (!unref(isSetState)) {
+            // 移动端且没设置过state
             isSetState.value = true;
             const {
               menuSetting: {
@@ -67,6 +70,7 @@
             appStore.setBeforeMiniInfo({ menuMode, menuCollapsed, menuType, menuSplit });
           }
         } else {
+          // PC端且设置过state
           if (unref(isSetState)) {
             isSetState.value = false;
             const { menuMode, menuCollapsed, menuType, menuSplit } = appStore.getBeforeMiniInfo;

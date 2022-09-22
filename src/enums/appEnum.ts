@@ -14,14 +14,22 @@ export enum ThemeEnum {
   LIGHT = 'light',
 }
 
+
+
+
 export enum SettingButtonPositionEnum {
+  // 自动选择
   AUTO = 'auto',
+  // 位于头部
   HEADER = 'header',
+  // 固定在右侧
   FIXED = 'fixed',
 }
 
 export enum SessionTimeoutProcessingEnum {
+  // 路由跳转到登录页
   ROUTE_JUMP,
+  // 生成登录弹窗，覆盖当前页面
   PAGE_COVERAGE,
 }
 

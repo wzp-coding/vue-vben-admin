@@ -18,12 +18,16 @@ import { resetRouter } from '/@/router';
 import { deepMerge } from '/@/utils';
 
 interface AppState {
+  // 主题模式
   darkMode?: ThemeEnum;
   // Page loading status
+  // 页面加载状态
   pageLoading: boolean;
   // project config
+  // 项目配置
   projectConfig: ProjectConfig | null;
   // When the window shrinks, remember some states, and restore these states when the window is restored
+  // 窗口缩小时记录某些信息，窗口恢复时还原信息
   beforeMiniInfo: BeforeMiniState;
 }
 let timeId: TimeoutHandle;
